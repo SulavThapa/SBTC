@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back1"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_marginTop="220dp"
+        android:id="@+id/img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="135dp"
+        android:background="@drawable/enter">
+    </ImageView>
+
+    <EditText
+        android:id="@+id/code"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/boder"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:hint="Enter Code Here"
+        android:layout_width="200dp"
+        android:textSize="20dp"
+        android:backgroundTint="@color/lightblue"
+        android:layout_height="50dp">
+    </EditText>
+
+    <Button
+        android:layout_marginLeft="155dp"
+        android:id="@+id/enter"
+        android:text="done"
+        android:background="@drawable/button_design"
+        android:layout_marginTop="18dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp">
+
+    </Button>
+
+</LinearLayout>
