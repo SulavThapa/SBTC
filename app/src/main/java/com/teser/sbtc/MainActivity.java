@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import javax.crypto.spec.SecretKeySpec;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String BaseUrl = "https://webhooks.mongodb-stitch.com/";
+    public static String BaseUrl = "http://localhost:5000/";
 
     private Button enter;
     private EditText username, password;
@@ -32,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainPage();
+                //mainPage();
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
             }
         });
     }
-
     private void mainPage() {
 //        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
 //        startActivity(intent);
@@ -52,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Login login = response.body();
                     assert login != null;
-                    String name = login.name + " ";
+                    String email = login.email + " ";
                     String pass = login.password + " ";
-
-                    System.out.println(name + " " + pass);
-                    if(username.getText().toString().equalsIgnoreCase(name) && password.getText().toString().equalsIgnoreCase((pass))){
+                    System.out.println("---------------------------------------");
+                    System.out.println(email + " " + pass);
+                    if(username.getText().toString().equalsIgnoreCase(email) && password.getText().toString().equalsIgnoreCase((pass))){
                       Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                       startActivity(intent);
                     };

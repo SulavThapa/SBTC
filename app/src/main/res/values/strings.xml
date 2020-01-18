@@ -2,4 +2,8 @@
     <string name="app_name">SBTC</string>
     <string name="title_activity_maps">Map</string>
     <string name="desc">This map is implemented by SULAV THAPA.</string>
+
+    <string name="title_map">Map</string>
+    <string name="title_bus">Bus</string>
+    <string name="title_profile">Profile</string>
 </resources>
