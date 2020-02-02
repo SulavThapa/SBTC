@@ -155,7 +155,7 @@ to give the color to the map
                 e.printStackTrace();
             }
         }
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_marker));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
