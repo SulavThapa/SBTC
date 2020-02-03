@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.crypto.spec.SecretKeySpec;
 
 import retrofit2.Call;
@@ -37,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         enter = (Button) findViewById(R.id.enter);
         enter.setOnClickListener(view -> {
+            try {
+                hashPassword();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             Log.i("When Button is clicked", "-----------------------------------------------");
 
             Retrofit retrofit = new Retrofit.Builder()
@@ -77,5 +84,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    private void hashPassword()  throws NoSuchAlgorithmException {
+        String  originalPassword = "password";
+        String generatedSecuredPasswordHash = BCrypt.hashpw(originalPassword, BCrypt.gensalt(12));
+        System.out.println(generatedSecuredPasswordHash);
+
+        boolean matched = BCrypt.checkpw(originalPassword, generatedSecuredPasswordHash);
+        System.out.println(matched);
     }
 }
