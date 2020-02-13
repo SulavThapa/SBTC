@@ -1,18 +1,45 @@
 package com.teser.sbtc;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Login {
+
+    @SerializedName("_id")
+    @Expose
+    public Id id;
     @SerializedName("name")
+    @Expose
     public String name;
     @SerializedName("email")
+    @Expose
     public String email;
     @SerializedName("password")
+    @Expose
     public String password;
     @SerializedName("address")
+    @Expose
     public String address;
     @SerializedName("class")
-    public String grade;
+    @Expose
+    public String _class;
+    @SerializedName("busNum")
+    @Expose
+    public String busNum;
+    @SerializedName("date")
+    @Expose
+    public Datedata date;
+    @SerializedName("__v")
+    @Expose
+    public V v;
+
+    public Id getId() {
+        return id;
+    }
+
+    public void setId(Id id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -46,12 +73,12 @@ public class Login {
         this.address = address;
     }
 
-    public String getGrade() {
-        return grade;
+    public String getClass_() {
+        return _class;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setClass_(String _class) {
+        this._class = _class;
     }
 
     public String getBusNum() {
@@ -62,8 +89,20 @@ public class Login {
         this.busNum = busNum;
     }
 
-    @SerializedName("busNum")
-    public String busNum;
+    public Datedata getDate() {
+        return date;
+    }
 
+    public void setDate(Datedata date) {
+        this.date = date;
+    }
+
+    public V getV() {
+        return v;
+    }
+
+    public void setV(V v) {
+        this.v = v;
+    }
 
 }

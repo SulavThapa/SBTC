@@ -5,17 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoDatabase;
-
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.spec.SecretKeySpec;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,59 +32,58 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         enter = (Button) findViewById(R.id.enter);
         enter.setOnClickListener(view -> {
-            try {
-                hashPassword();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
+
+            //LogingUser();
+
+            Log.i("The password is hashed", "-----------------------------------------------");
+            //to hash the password with bcrypt
+            String  originalPassword = "test";
+            String generatedSecuredPasswordHash = BCrypt.hashpw(originalPassword, BCrypt.gensalt(12));
+            System.out.println(generatedSecuredPasswordHash);
+
             Log.i("When Button is clicked", "-----------------------------------------------");
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(BaseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            LoginInterface service = retrofit.create(LoginInterface.class);
-            Call<Login> call = service.getLoginData();
-            Log.i("Reached here", "-----------------------------------------------");
 
-            call.enqueue(new Callback<Login>() {
-                @Override
-                public void onResponse(Call<Login> call, Response<Login> response) {
-                    if (response.code() == 200) {
-                        Login login = response.body();
-                        assert login != null;
-                        Log.i("Start Before Loop", "-----------------------------------------------");
-
-
-                        for (int i = 0; i < 3; i++) {
-                            String email = login.email + " ";
-                            String pass = login.password + " ";
-                            Log.i("Start", "-----------------------------------------------");
-                            Log.i("Output", email + " " + pass);
-                            Log.i("End", "-----------------------------------------------");
-
-
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Login> call, Throwable t) {
-                    Log.i("Error", "-----------------------------------------------");
-                    Log.e("Error: ", t.getMessage());
-                    Log.i("Error", "-----------------------------------------------");
-
-                }
-            });
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
         });
     }
 
-    private void hashPassword()  throws NoSuchAlgorithmException {
-        String  originalPassword = "password";
-        String generatedSecuredPasswordHash = BCrypt.hashpw(originalPassword, BCrypt.gensalt(12));
-        System.out.println(generatedSecuredPasswordHash);
+    private void LogingUser() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BaseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Log.i("Reached here 1", "-----------------------------------------------");
 
-        boolean matched = BCrypt.checkpw(originalPassword, generatedSecuredPasswordHash);
-        System.out.println(matched);
+        LoginInterface service = retrofit.create(LoginInterface.class);
+        Call<List<Login>> call = service.getLoginData();
+        Log.i("Reached here 2 ", "-----------------------------------------------");
+
+        call.enqueue(new Callback<List<Login>>() {
+            @Override
+            public void onResponse(Call<List<Login>> call, Response<List<Login>> response) {
+                Log.i("Reached here 3 ", "-----------------------------------------------");
+                if (response.code() == 200) {
+                    Log.i("Reached here 4 ", "-----------------------------------------------");
+                    Login login = (Login) response.body();
+                    assert login != null;
+
+                    String email = login.email + " ";
+                    String pass = login.password + " ";
+                    Log.i("Start", "-----------------------------------------------");
+                    Log.i("Output", email + " " + pass);
+                    Log.i("End", "-----------------------------------------------");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Login>> call, Throwable t) {
+                Log.i("Error", "-----------------------------------------------");
+                Log.e("Error: ", t.getMessage());
+                Log.i("Error", "-----------------------------------------------");
+
+            }
+        });
     }
 }
