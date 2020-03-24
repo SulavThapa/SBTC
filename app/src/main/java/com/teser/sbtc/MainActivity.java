@@ -1,6 +1,8 @@
 package com.teser.sbtc;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
     public static String BaseUrl = "https://webhooks.mongodb-stitch.com/";
 
     private Button enter;
-    private EditText username, password;
+    private EditText username;
+    private final String CHANNEL_ID = "notification";
+    private final int NOTIFICATION_ID = 001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +34,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
         enter = (Button) findViewById(R.id.enter);
         enter.setOnClickListener(view -> {
 
             //LogingUser();
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
+                    .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                    .setContentTitle("My notification")
+                    .setContentText("Much longer text that cannot fit one line...")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("Much longer text that cannot fit one line..."))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+            notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
 
             Log.i("The password is hashed", "-----------------------------------------------");
             //to hash the password with bcrypt

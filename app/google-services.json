@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "127808489206",
+    "firebase_url": "https://sulav-21.firebaseio.com",
+    "project_id": "sulav-21",
+    "storage_bucket": "sulav-21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127808489206:android:6d26702aaa6954e6c8ced7",
+        "android_client_info": {
+          "package_name": "com.teser.sbtc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127808489206-dln9b52f35q59ui06qp863338ohemdvv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teser.sbtc",
+            "certificate_hash": "c129f59d783ecbb6c26b36c4c31553c4461955e4"
+          }
+        },
+        {
+          "client_id": "127808489206-3lbe87nn0gbcto9dpl0lg2um0m04pqkn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBG_x0qmJXNNAjcKfWoxx11vXUzot0_fA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127808489206-3lbe87nn0gbcto9dpl0lg2um0m04pqkn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
