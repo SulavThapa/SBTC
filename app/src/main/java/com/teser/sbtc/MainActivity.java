@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String BaseUrl = "https://webhooks.mongodb-stitch.com/";
+    public static String BaseUrl = "https://api.thingspeak.com/";
 
     private Button enter;
     private EditText username;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         enter = (Button) findViewById(R.id.enter);
         enter.setOnClickListener(view -> {
 
-            //LogingUser();
+            LogingUser();
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
                     .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
                     .setContentTitle("My notification")
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("When Button is clicked", "-----------------------------------------------");
 
 
-            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            //startActivity(intent);
         });
     }
 
@@ -71,28 +71,32 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Reached here 1", "-----------------------------------------------");
 
         LoginInterface service = retrofit.create(LoginInterface.class);
-        Call<List<Login>> call = service.getLoginData();
+        Call<MainChannel> call = service.getGpsData();
         Log.i("Reached here 2 ", "-----------------------------------------------");
 
-        call.enqueue(new Callback<List<Login>>() {
+        call.enqueue(new Callback<MainChannel>() {
             @Override
-            public void onResponse(Call<List<Login>> call, Response<List<Login>> response) {
+            public void onResponse(Call<MainChannel> call, Response<MainChannel> response) {
                 Log.i("Reached here 3 ", "-----------------------------------------------");
                 if (response.code() == 200) {
                     Log.i("Reached here 4 ", "-----------------------------------------------");
-                    Login login = (Login) response.body();
-                    assert login != null;
+                    MainChannel mainChannel = (MainChannel) response.body();
+                    assert mainChannel != null;
 
-                    String email = login.email + " ";
-                    String pass = login.password + " ";
-                    Log.i("Start", "-----------------------------------------------");
-                    Log.i("Output", email + " " + pass);
-                    Log.i("End", "-----------------------------------------------");
+                    int ss = mainChannel.feeds.size();
+                    for (int i = 0; i < ss; i++) {
+
+                        String lat = mainChannel.feeds.get(i).getField1() + " ";
+                        String lon = mainChannel.feeds.get(i).getField2() + " ";
+                        Log.i("Start", "-----------------------------------------------");
+                        Log.i("Output", lat + " " + lon);
+                        Log.i("End", "-----------------------------------------------");
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Login>> call, Throwable t) {
+            public void onFailure(Call<MainChannel> call, Throwable t) {
                 Log.i("Error", "-----------------------------------------------");
                 Log.e("Error: ", t.getMessage());
                 Log.i("Error", "-----------------------------------------------");
