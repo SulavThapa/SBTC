@@ -32,8 +32,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".Test"
+            android:label="@string/title_activity_test"></activity>
+        <activity
             android:name=".Tracker"
-            android:label="@string/title_activity_tracker"></activity>
+            android:label="@string/title_activity_tracker" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".BusActivity" />
         <activity

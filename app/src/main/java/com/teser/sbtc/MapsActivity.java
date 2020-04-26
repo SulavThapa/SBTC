@@ -54,8 +54,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -211,21 +211,21 @@ to give the color to the map
         }
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-                Fragment fragment;
-                switch (item.getItemId()) {
-                    case R.id.navigation_map:
-                        return false;
-                    case R.id.navigation_bus:
-                        Intent intent2 = new Intent(MapsActivity.this, BusActivity.class);
-                        startActivity(intent2);
-                        return true;
-                    case R.id.navigation_profile:
-                        Intent intent3 = new Intent(MapsActivity.this, ProfileActivity.class);
-                        startActivity(intent3);
-                        return true;
-                }
-                return false;
-            };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = item -> {
+//                Fragment fragment;
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_map:
+//                        return false;
+//                    case R.id.navigation_bus:
+//                        Intent intent2 = new Intent(MapsActivity.this, BusActivity.class);
+//                        startActivity(intent2);
+//                        return true;
+//                    case R.id.navigation_profile:
+//                        Intent intent3 = new Intent(MapsActivity.this, ProfileActivity.class);
+//                        startActivity(intent3);
+//                        return true;
+//                }
+//                return false;
+//            };
 }

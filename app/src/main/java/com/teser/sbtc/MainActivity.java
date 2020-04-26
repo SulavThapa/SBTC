@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     public static String BaseUrl = "https://api.thingspeak.com/";
-    public static String lat, lon;
+    public static String lat;
+    public static String lon;
 
     private Button enter;
     private EditText username;
@@ -41,16 +47,6 @@ public class MainActivity extends AppCompatActivity {
         enter.setOnClickListener(view -> {
 
             LogingUser();
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
-                    .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-                    .setContentTitle("My notification")
-                    .setContentText("Much longer text that cannot fit one line...")
-                    .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Much longer text that cannot fit one line..."))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-            notificationManagerCompat.notify(NOTIFICATION_ID,builder.build());
 
             Log.i("The password is hashed", "-----------------------------------------------");
             //to hash the password with bcrypt
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             String code = username.getText().toString();
             if(code.equals("tracker")){
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                Intent intent = new Intent(MainActivity.this, Test.class);
                 startActivity(intent);
             }
             else {

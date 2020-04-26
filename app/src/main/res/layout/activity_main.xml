@@ -23,6 +23,7 @@
         android:background="@drawable/boder"
         android:layout_gravity="center"
         android:gravity="center"
+        android:inputType="textPassword"
         android:hint="Bus Code"
         android:layout_width="200dp"
         android:textSize="20dp"

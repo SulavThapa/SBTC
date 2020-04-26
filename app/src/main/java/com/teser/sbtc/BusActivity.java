@@ -24,7 +24,7 @@ public class BusActivity extends AppCompatActivity {
         Fragment fragment;
         switch (item.getItemId()) {
             case R.id.navigation_map:
-                Intent intent2 = new Intent(BusActivity.this, MapsActivity.class);
+                Intent intent2 = new Intent(BusActivity.this, Test.class);
                 startActivity(intent2);
                 return true;
             case R.id.navigation_bus:
